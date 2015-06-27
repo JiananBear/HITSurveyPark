@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<constant name="struts.devMode" value="true"/>
+	<constant name="struts.ui.theme" value="simple"/>
+	<!-- 允许静态方法调用 -->
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+	<include file="struts2/struts-user.xml"></include>
+</struts>

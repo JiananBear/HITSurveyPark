@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+	<template surveyname="模板一" info="这是模板一，共2页数，第一页10道单项，第二页2道文本">
+		<page pagename='第一页'>
+			<question questionType='1' />
+			<question questionType='1' />
+			<question questionType='1' />
+			<question questionType='1' />
+			<question questionType='1' />
+			<question questionType='1' />
+			<question questionType='1' />
+			<question questionType='1' />
+			<question questionType='1' />
+			<question questionType='1' />
+		</page>
+		<page pagename="第二页">
+			<question questionType='5' />
+			<question questionType='5' />
+		</page>
+	</template>
+	
+	<template surveyname="模板二" info="这是模板一，共1页数，第一页10道单项，2道文本">
+		<page pagename='第一页'>
+			<question questionType='1' />
+			<question questionType='1' />
+			<question questionType='1' />
+			<question questionType='1' />
+			<question questionType='1' />
+			<question questionType='1' />
+			<question questionType='1' />
+			<question questionType='8' />
+			<question questionType='7' />
+			<question questionType='6' />
+			<question questionType='5' />
+			<question questionType='5' />
+		</page>
+	</template>
+</templates>

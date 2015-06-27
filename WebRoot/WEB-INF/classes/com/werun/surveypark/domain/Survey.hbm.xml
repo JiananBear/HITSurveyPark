@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping  package="com.werun.surveypark.domain"> 
+	<class name="Survey" table="surveys">
+		<id name="id" column="id" type="integer">
+			<generator class="identity" />
+		</id>
+		<property name="title" column="title" type="string" length="200" />
+		<property name="preText" column="pretext" type="string" length="50" />
+		<property name="nextText" column="nexttext" type="string" length="50" />
+		<property name="exitText" column="exittext" type="string" length="50"/>
+		<property name="doneText" column="donetext" type="string" length="50"/>
+		<property name="info" column="info" type="string" length="500"/>
+		<property name="createTime" column="createtime" type="timestamp" update="false" />
+		<property name="closed" column="closed" type="boolean" update="false" />
+		<property name="checked" column="checked" type="int" update="false" />
+		<property name="logoPhotoPath" column="logophotopath" type="string" length="200" update="false"/>
+		<property name="maxOrderno" formula="(select max(p.orderno) from pages p where p.surveyid = id)" />
+		<property name="minOrderno" formula="(select min(p.orderno) from pages p where p.surveyid = id)" />
+		<!-- 映射从Survey到user之间多对一关联关系 -->
+		<many-to-one name="user" class="User" column="userid"  />
+		<!-- 映射从Survey到Page之间一对多关联关系  -->
+		<set name="pages" inverse="true" order-by="orderno">
+			<key column="surveyid" />
+			<one-to-many class="Page"/>
+		</set>
+	</class>	
+</hibernate-mapping>
