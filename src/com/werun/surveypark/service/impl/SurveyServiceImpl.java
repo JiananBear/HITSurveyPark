@@ -254,8 +254,8 @@ public class SurveyServiceImpl implements SurveyService{
 
 	@Override
 	public List<Survey> findAllAvailableSurveys() {
-		String hql = "from Survey s where s.closed = ?" ;
-		List<Survey> s= surveyDao.findEntityByHQL(hql,false);
+		String hql = "from Survey s where s.closed = ? and s.checked=?" ;
+		List<Survey> s= surveyDao.findEntityByHQL(hql,false,Survey.CHECKED);
 		for (Survey survey : s) {
 			if (survey.getUser()!=null)
 				survey.getUser().toString();

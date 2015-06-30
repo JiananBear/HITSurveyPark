@@ -12,6 +12,10 @@ import com.opensymphony.xwork2.interceptor.Interceptor;
 import com.werun.surveypark.service.RightService;
 import com.werun.surveypark.util.ValidateUtil;
 
+/**
+ * 权限捕获
+ * 
+ */
 public class CatchUrlInterceptor implements Interceptor{
 
 	

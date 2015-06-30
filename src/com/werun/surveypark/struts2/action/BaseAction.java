@@ -7,7 +7,12 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
-
+/**
+ * 
+ * @author LuckBear
+ *
+ * @param <T>
+ */
 public abstract class BaseAction<T> extends ActionSupport implements ModelDriven<T>,Preparable{
 
 	private static final long serialVersionUID = -2202395472487014615L;

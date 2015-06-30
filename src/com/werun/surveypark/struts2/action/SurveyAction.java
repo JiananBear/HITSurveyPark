@@ -102,26 +102,115 @@ public class SurveyAction extends BaseAction<Survey> implements UserAware{
 
 	private User user;
 	
-	
+	/**
+	 * 查看状态是审核中的问卷
+	 * @author  koda
+	 * @return
+	 */
 	public String findCheckingSurveys()
 	{
 		this.checkSurveys=surService.getALLCheckingSurveys();
 		return "checkSurvey";
 	}
-	
+	/**
+	 * 修改问卷的审核状态
+	 * @author  koda
+	 * @return
+	 */
 	public String checkSurvey()
 	{
 		surService.checkSurvey(sid,check);
 		return "findCheckingSurvey";
-		
 	}
 	
+	/**
+	 * 查看我的问卷
+	 * @auther koda
+	 * @return
+	 */
+	public String mySurveys(){
+		mySurveys=surService.findMySurveys(user);
+		return "mySurveyListPage";
+	}
+	/**
+	 * @auther koda
+	 * @return
+	 */
+	public String designSurvey()
+	{
+		this.model=surService.getSurveyWithChildren(sid);
+		return "designSurveyPage";
+	}
+	/**
+	 * @auther koda
+	 * @return
+	 */
+	public String editSurvey()
+	{
+		this.model=surService.getSurvey(sid);
+		return "editSurveyPage" ;
+	}
+	
+	/**
+	 * @auther koda
+	 * @return
+	 */
+	public String updateSurvey()
+	{
+		sid=this.model.getId();
+		this.model.setUser(user);
+		surService.updateSurvey(model);
+		return "designSurveyAction";
+	}
+	
+	/**
+	 * @auther koda
+	 * @return
+	 */
+	public String deleteSurvey()
+	{
+		surService.deleteSurvey(sid);
+		return "findMySurveysAction";
+	}
+	/**
+	 * @auther koda
+	 * @return
+	 */
+	public String clearAnswers()
+	{
+		surService.clearAnswers(sid);
+		return "findMySurveysAction";
+	}
+	/**
+	 * @auther koda
+	 * @return
+	 */
+	public String toggleStatus()
+	{
+		surService.toggleStatus(sid);
+		return "findMySurveysAction";
+	}
+	
+	
+	
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	
+	
+	
+	/**
+	 * 创建空的问卷
+	 * @author LuckyBear
+	 * @return
+	 */
 	public String blockSurvey()
 	{
 		this.model=surService.getBlockSurvey(user);
 		return "designSurveyPage" ;
 	}
-	
+	/**
+	 * 创建模板问卷
+	 * @return
+	 */
 	public String templateSurvey()
 	{
 		String path=getXmlurl();
@@ -129,13 +218,19 @@ public class SurveyAction extends BaseAction<Survey> implements UserAware{
 		return "designSurveyPage" ;
 	}
 	
-
+	/**
+	 * 创建空的问卷
+	 * @return
+	 */
 	public String newSurvey()
 	{
 		this.model=surService.newSurvey(user);
 		return "designSurveyPage" ;
 	}
-	
+	/**
+	 * 创建模板问卷
+	 * @return
+	 */
 	public String newSurveyTemplate()
 	{
 		String path=getXmlurl();
@@ -153,50 +248,8 @@ public class SurveyAction extends BaseAction<Survey> implements UserAware{
 		return "designSurveyPage" ;
 	}
 	
-	public String mySurveys(){
-		mySurveys=surService.findMySurveys(user);
-		return "mySurveyListPage";
-	}
-	
-	public String designSurvey()
-	{
-		this.model=surService.getSurveyWithChildren(sid);
-		return "designSurveyPage";
-	}
-	
-	public String editSurvey()
-	{
-		this.model=surService.getSurvey(sid);
-		return "editSurveyPage" ;
-	}
 	
 	
-	public String updateSurvey()
-	{
-		sid=this.model.getId();
-		this.model.setUser(user);
-		surService.updateSurvey(model);
-		return "designSurveyAction";
-	}
-	
-	
-	public String deleteSurvey()
-	{
-		surService.deleteSurvey(sid);
-		return "findMySurveysAction";
-	}
-	
-	public String clearAnswers()
-	{
-		surService.clearAnswers(sid);
-		return "findMySurveysAction";
-	}
-	
-	public String toggleStatus()
-	{
-		surService.toggleStatus(sid);
-		return "findMySurveysAction";
-	}
 	
 	
 	public String toAddLogoPage()

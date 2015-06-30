@@ -7,7 +7,10 @@ import com.opensymphony.xwork2.ActionProxy;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 import com.werun.surveypark.struts2.action.BaseAction;
 import com.werun.surveypark.util.ValidateUtil;
-
+/**
+ * 权限拦截器
+ * 
+ */
 public class RightFilterInterceptor implements Interceptor{
 
 	@Override
@@ -21,7 +24,7 @@ public class RightFilterInterceptor implements Interceptor{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
 		

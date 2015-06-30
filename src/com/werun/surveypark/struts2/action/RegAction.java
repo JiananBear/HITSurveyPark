@@ -44,12 +44,15 @@ public class RegAction extends BaseAction<User>{
 	{
 		return "regPage";
 	}
-	
+	/**
+	 * 执行doReg方法前 首先会去执行validate方法 用于检验
+	 * @return
+	 */
 	public String doReg()
 	{
 		User temp=new User();
 		BeanUtils.copyProperties(this.getModel(), temp);
-		temp.setPassword(DataUtil.md5(temp.getPassword()));
+		temp.setPassword(DataUtil.md5(temp.getPassword()));//密码加密
 		service.saveEntry(temp);
 		return SUCCESS;
 	}

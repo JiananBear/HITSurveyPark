@@ -60,44 +60,57 @@ public class LoginAction extends BaseAction<User> implements SessionAware{
 		User u=(User) sessionMap.get("user");
 		if (u.isSuperAdmin())
 		{
-			return "checkSurvey";
+			return "checkSurvey";  //是管理员 跳转到检查审批调查界面
 		}
 		else
 		{
-			this.randomSurveys=surveyService.findRandomNSurveys(4);
+			this.randomSurveys=surveyService.findRandomNSurveys(4);//随机找4份调查
 			return SUCCESS;
 		}
 	}
 	
-	
+	/**
+	 * 执行此方法前 会优先执行validateDoLogin()方法
+	 * @return
+	 */
 	public String doLogin()
 	{
-		return "toIndex";
+		return "toIndex";//跳转到toIndex 方法
 	}
-	
+	/**
+	 * 登出
+	 * @return
+	 */
 	public String loginOut()
 	{
-		sessionMap.remove("user");
+		sessionMap.remove("user"); //将user 从suer 里面删除
 		return "login";
 	}
-	
+	/**
+	 * 登录的时候对用户信息惊醒校验
+	 */
 	public void validateDoLogin()
 	{
+		//检查用户密码是否正确
 		User user=userService.validateLoginInfo(this.getModel().getEmail(),DataUtil.md5(this.getModel().getPassword()));
 		if(user==null)
 		{
-			addActionError("email/password wrong");
+			addActionError("email/password wrong"); //不正确 就提示错误
 		}
 		else
 		{
 			int maxRightPos = rightService.getMaxRightPos();
-			user.setRightSum(new long[maxRightPos + 1]);
+			user.setRightSum(new long[maxRightPos + 1]);//为用户设置权限码
 			user.calculateRightSum();
 			//计算用户的权限总和
-			sessionMap.put("user", user);
+			sessionMap.put("user", user);//将user 放到 session中
 		}
 	}
-	
+	/**
+	 * 得到图片路径
+	 * @param logoPhotoPath
+	 * @return
+	 */
 	public String getImageUrl(String logoPhotoPath)
 	{
 		if(ValidateUtil.isValid(logoPhotoPath))

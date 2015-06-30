@@ -100,15 +100,23 @@ public class MatrixStatisticsAction extends BaseAction<Question>{
 	public void setQsm(QuestionStatisticsModel qsm) {
 		this.qsm = qsm;
 	}
-	
+	/**
+	 * 主要的执行方法
+	 * @author Kevin
+	 */
 	@Override
 	public String execute() throws Exception {
-		this.qsm=ss.statistics(qid);
-		this.qsm.getQuestion().setPage(null);
-		this.qsmjson=JSONArray.fromObject(qsm).toString();
-		return ""+qsm.getQuestion().getQuestionType();
+		this.qsm=ss.statistics(qid); // 得到分析数据模型
+		this.qsm.getQuestion().setPage(null); //将不需要转化成json的数据设置为null
+		this.qsmjson=JSONArray.fromObject(qsm).toString();//转化为json
+		return ""+qsm.getQuestion().getQuestionType();//根据题目类型跳转到相应的界面
 	}
-	
+	/**
+	 * 统计得到各选项答题百分比  用于 矩阵单选 和矩阵多选 
+	 * @param rindex
+	 * @param cindex
+	 * @return
+	 */
 	public String getScale(int rindex , int cindex)
 	{
 		int qcount=0;
